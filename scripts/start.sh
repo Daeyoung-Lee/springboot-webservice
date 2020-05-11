@@ -7,19 +7,16 @@ source ${ABSDIR}/profile.sh
 REPOSITORY=/home/ec2-user/app/step3
 PROJECT_NAME=springboot-webservice
 
+cd $REPOSITORY
+
 echo "> Build 파일 복사"
 echo "> cp $REPOSITORY/zip/*.war $REPOSITORY/"
 cp $REPOSITORY/zip/*.war $REPOSITORY/
 
 JAR_NAME=$(ls -tr $REPOSITORY/ | grep war | tail -n 1)
-
-echo "> JAR Name: $JAR_NAME"
-
-echo "> $JAR_NAME 에 실행권한 추가"
-
-chmod +x $JAR_NAME
-
 IDLE_PROFILE=$(find_idle_profile)
+echo "> JAR_NAME : $JAR_NAME"
+echo "> IDLE_PROFILE: $IDLE_PROFILE"
 
 echo "> 새 애플리케이션($JAR_NAME) 배포"
 nohup java -jar \
